@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a routerLink="/" class="navbar-brand">Alt Reality</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        <li *ngIf="isLoggedIn" class="nav-item">
+          <a routerLink="/user/characters" class="nav-link">Characters</a>
+        </li>
+        <li *ngIf="isLoggedIn" class="nav-item">
+          <a routerLink="/user/teams" class="nav-link">Teams</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-md-auto">
+        <li class="nav-item">
+          <a *ngIf="!isLoggedIn" class="nav-link" (click)="login()">Login</a>
+          <span *ngIf="isLoggedIn" class="nav-link">{{user.battleTag}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid margin-top-56">
+  <router-outlet></router-outlet>
+</div>

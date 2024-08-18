@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="btn-group" role="group" aria-label="View toggle">
+      <input type="radio" class="btn-check" name="btnGroupView" id="btnViewList" autocomplete="off" [checked]="vm.view === 'list'" (change)="setView('list')">
+      <label class="btn btn-outline-primary" for="btnViewList">List</label>
+    
+      <input type="radio" class="btn-check" name="btnGroupView" id="btnViewImages" autocomplete="off" [checked]="vm.view === 'images'" (change)="setView('images')">
+      <label class="btn btn-outline-primary" for="btnViewImages">Images</label>
+    </div>    
+  </div>
+  <!--
+  <div class="col-md-6 text-end">
+    <input type="checkbox" class="btn-check" name="btnFilter" id="btnFilter" autocomplete="off" [checked]="vm.showFilterPanel" (click)="toggleFilterPanel()">
+    <label class="btn btn-outline-primary" for="btnFilter">Filters</label>
+  </div>
+  -->
+</div>
+
+<!--
+<div *ngIf="vm.showFilterPanel" class="row mt-3">
+  <div class="col-md-12">
+    <form [formGroup]="vm.filterForm">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="levelFilterButton" data-bs-toggle="dropdown" aria-expanded="false" [disabled]="!vm.isLevelFilterActive">
+          Level
+        </button>
+        <div class="dropdown-menu px-4">
+          <div *ngFor="let level of vm.filterForm.controls.levels.controls; let i=index" class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" [formControl]="level">
+              {{vm.levelFilterOptions[i]}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+-->
+
+<div *ngIf="vm.view === 'list'" class="row mt-3">
+  <div class="col-md-12">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="pointer" (click)="addSort('name')">Name</th>
+          <th class="pointer" (click)="addSort('level')">Level</th>
+          <th class="pointer" (click)="addSort('averageItemLevel')">ILevel</th>
+          <th class="pointer" (click)="addSort('faction')">Faction</th>
+          <th class="pointer" (click)="addSort('race')">Race</th>
+          <th class="pointer" (click)="addSort('playableClass')">Class</th>
+          <th class="pointer" (click)="addSort('realm.name')">Realm</th>
+          <th class="pointer" (click)="addSort('guild.name')">Guild</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let character of vm.characters" class="pointer" (click)="navigateToCharacter(character.realm?.slug, character.name)">
+          <td>{{character.name}}</td>
+          <td>{{character.level}}</td>
+          <td>{{character.averageItemLevel}}</td>
+          <td>{{character.faction}}</td>
+          <td>{{character.race}}</td>
+          <td>{{character.playableClass}}</td>
+          <td>{{character.realm?.name}}</td>
+          <td>{{character.guild?.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="vm.view === 'images'" class="row mt-3">
+  <div *ngFor="let character of vm.characters" class="col-md-3">
+    <div class="card mb-3 pointer" (click)="navigateToCharacter(character.realm?.slug, character.name)">
+      <img *ngIf="character.media" src="{{character.media.inset}}" class="card-img-top" />
+      <div class="card-body">
+        <h5 class="card-title">{{character.name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{character.realm?.name}}</h6>
+      </div>
+    </div>
+  </div>
+</div>

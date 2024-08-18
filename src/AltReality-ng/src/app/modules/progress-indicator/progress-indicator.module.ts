@@ -1,0 +1,17 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component';
+
+
+@NgModule({
+  declarations: [
+    ProgressSpinnerComponent
+  ],
+  imports: [
+    CommonModule
+  ],
+  exports: [
+    ProgressSpinnerComponent
+  ]
+})
+export class ProgressIndicatorModule { }
